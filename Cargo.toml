@@ -1,0 +1,43 @@
+[package]
+name = "token-analyzer"
+version = "0.0.1"
+edition = "2024"
+authors = ["WillIsback <your-email@example.com>"]
+description = "Fast, parallel token security analyzer - Detect exposed secrets, API keys, and sensitive tokens in your codebase"
+license = "MIT"
+repository = "https://github.com/WillIsback/token-analyzer"
+homepage = "https://github.com/WillIsback/token-analyzer"
+documentation = "https://docs.rs/token-analyzer"
+readme = "README.md"
+keywords = ["security", "secrets", "tokens", "api-key", "static-analysis"]
+categories = ["command-line-utilities", "development-tools", "authentication"]
+rust-version = "1.85"
+
+[lib]
+name = "token_analyzer"
+path = "src/lib.rs"
+
+[[bin]]
+name = "token-analyzer"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0"
+ignore = "0.4"
+parking_lot = "0.12"
+rayon = "1.10"
+regex = "1.11"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[dev-dependencies]
+tempfile = "3.14"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

@@ -1,0 +1,22 @@
+# ⚠️ DEMO FILE - Shows dangerous patterns
+# This file demonstrates security anti-patterns
+
+version: "3.8"
+
+services:
+  api:
+    image: myapp:latest
+    environment:
+      # 🔴 BAD: Hardcoded secret value
+      - API_KEY=hardcoded_secret_value_for_docker_compose
+      # ✅ GOOD: Reference to environment variable
+      - DATABASE_URL=${DATABASE_URL}
+    ports:
+      - "8080:8080"
+
+  database:
+    image: postgres:15
+    environment:
+      # 🔴 BAD: Another hardcoded secret
+      - API_KEY=another_hardcoded_api_key_value_here
+      - POSTGRES_PASSWORD=supersecretdbpassword
